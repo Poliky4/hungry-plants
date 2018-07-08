@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mansdahlstrom1/hungry-plants/issues"
   },
-  "homepage": "https://github.com/mansdahlstrom1/hungry-plants#readme"
+  "homepage": "https://github.com/mansdahlstrom1/hungry-plants#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
