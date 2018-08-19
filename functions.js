@@ -17,17 +17,15 @@ const singlePlant = (id = uuidv4()) => ({
 });
 
 
-const manyPlants = (amount) => {
+const manyPlants = (amount = 5) => {
   const array = [];
   for (let i = 0; i < amount; i += 1) {
     array.push(singlePlant());
   }
-  console.log(array);
-
   return array;
 };
 
-const manyMeasurements = (amount) => {
+const manyMeasurements = (amount = 5) => {
   const array = [];
   const uuid = uuidv4();
   for (let i = 0; i < amount; i += 1) {
