@@ -30,6 +30,4 @@ An Express api that supports Hungry-plants app and sensor unit
 - GET /:id/measurements
 - GET /:id/measurements/latest // vänta med denna
 
-
-
 ```
