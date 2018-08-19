@@ -14,12 +14,11 @@ An Express api that supports Hungry-plants app and sensor unit
   breed [string]               units
   latest_measurement [Obj]     humidity
                                Timestamp
-  
-  
+
 # Get all plants
 - GET /
 
-#Get single plant
+# Get single plant
 - GET /:id
 
 # get single plant measurement
