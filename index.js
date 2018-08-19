@@ -50,6 +50,59 @@ app.post('/postMessurement', async (req, res) => {
   }
 });
 
+// messurements
+app.get('/:id/latest', (req, res) => res.status(200).json({
+  id: 'random-id',
+  plant_id: req.params.id,
+  timestamp: new Date().toISOString(),
+  volt: 22,
+  units: 500,
+  humidity: 0.87,
+}));
+
+app.get('/:id/all', (req, res) => res.status(200).json([
+  {
+    id: 'random-id',
+    plant_id: req.params.id,
+    timestamp: new Date().toISOString(),
+    volt: 22,
+    units: 500,
+    humidity: 0.87,
+  },
+  {
+    id: 'random-id',
+    plant_id: req.params.id,
+    timestamp: new Date().toISOString(),
+    volt: 22,
+    units: 500,
+    humidity: 0.87,
+  },
+  {
+    id: 'random-id',
+    plant_id: req.params.id,
+    timestamp: new Date().toISOString(),
+    volt: 22,
+    units: 500,
+    humidity: 0.87,
+  },
+  {
+    id: 'random-id',
+    plant_id: req.params.id,
+    timestamp: new Date().toISOString(),
+    volt: 22,
+    units: 500,
+    humidity: 0.87,
+  },
+  {
+    id: 'random-id',
+    plant_id: req.params.id,
+    timestamp: new Date().toISOString(),
+    volt: 22,
+    units: 500,
+    humidity: 0.87,
+  },
+]));
+
 app.listen(3000, () => {
   console.log('app running on port 3000');
 });
