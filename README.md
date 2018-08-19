@@ -19,15 +19,11 @@ An Express api that supports Hungry-plants app and sensor unit
 # Get all plants
 - GET /
 
-# get all measurements  
-- GET /measurements
-
-
 #Get single plant
 - GET /:id
 
 # get single plant measurement
 - GET /:id/measurements
-- GET /:id/measurements/latest // vänta med denna
+- GET /:id/measurements/latest
 
 ```
