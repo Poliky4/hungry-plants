@@ -6,7 +6,7 @@ const singleMeasurement = id => ({
   timestamp: new Date().toISOString(),
   volt: 22,
   units: 500,
-  humidity: 0.87,
+  humidity: Number(Math.random()).toFixed(2),
 });
 
 const singlePlant = (id = uuidv4()) => ({
