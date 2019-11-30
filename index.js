@@ -26,16 +26,17 @@ app.get('/:id/measurements/latest', (req, res) => res.status(200).json(singleMea
 app.get('/:id/measurements', (req, res) => res.status(200).json(manyMeasurements(20)));
 
 app.post('/postMessurement', async (req, res) => {
+  console.log(req.body);
   try {
-    if (!req.body.units) {
+    if (!req.body.plant_id) {
       return res.status(400).json({
-        msg: 'Error, units was not defined',
+        msg: 'Error, plant_id was not defined',
       });
     }
 
-    if (!req.body.volt) {
+    if (!req.body.data) {
       return res.status(400).json({
-        msg: 'Error, volt was not defined',
+        msg: 'Error, data was not defined',
       });
     }
     const filename = `./logs/${moment().format('YYYY-MM-DD')}.log.json`;
