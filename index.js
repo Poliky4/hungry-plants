@@ -2,13 +2,12 @@ const fs = require('fs');
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const moment = require('moment');
+// const moment = require('moment');
 
 const {
   singleMeasurement,
-  singlePlant,
   manyMeasurements,
-  manyPlants,
+  // manyPlants,
 } = require('./functions');
 
 const app = express();
@@ -17,9 +16,30 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.get('/', (req, res) => res.status(200).json(manyPlants(10)));
+app.get('/', async (req, res) => {
+  const plants = await JSON.parse(fs.readFileSync('./db/plants.json').toString());
+  return res.status(200).json(plants);
+});
 
-app.get('/:id', (req, res) => res.status(200).json(singlePlant(req.params.id)));
+app.get('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  const plants = await JSON.parse(fs.readFileSync('./db/plants.json').toString());
+  const plant = plants.find(item => item.id === id);
+
+  if (!plant) {
+    console.log(404);
+    return res.status(404).json({ message: 'Not found' });
+  }
+
+  const measurements = await JSON.parse(fs.readFileSync(`./db/measurements/${id}.json`));
+
+  console.log(200);
+  return res.status(200).json({
+    ...plant,
+    measurements,
+  });
+});
 
 app.get('/:id/measurements/latest', (req, res) => res.status(200).json(singleMeasurement(req.params.id)));
 
@@ -27,6 +47,14 @@ app.get('/:id/measurements', (req, res) => res.status(200).json(manyMeasurements
 
 app.post('/postMessurement', async (req, res) => {
   console.log(req.body);
+
+  const {
+    body: {
+      plant_id: plantId,
+      data: measurement,
+    },
+  } = req;
+
   try {
     if (!req.body.plant_id) {
       return res.status(400).json({
@@ -39,24 +67,24 @@ app.post('/postMessurement', async (req, res) => {
         msg: 'Error, data was not defined',
       });
     }
-    const filename = `./logs/${moment().format('YYYY-MM-DD')}.log.json`;
+    const filename = `./db/measurements/${plantId}.json`;
 
     const data = {
       timestamp: new Date().toISOString(),
-      ...req.body,
+      measurement,
     };
 
     // if file exists
     if (await !fs.existsSync(filename)) {
-      await fs.writeFileSync(filename, JSON.stringify({ logs: [] }, null, 2));
+      await fs.writeFileSync(filename, JSON.stringify([], null, 2));
     }
 
-    const log = await JSON.parse(fs.readFileSync(filename).toString());
-    log.logs.push(data);
+    const measurementDb = await JSON.parse(fs.readFileSync(filename).toString());
+    measurementDb.push(data);
 
-    await fs.writeFileSync(filename, JSON.stringify(log, null, 2));
-    // DO somthing with req.body
-    return res.status(200).json(data);
+    await fs.writeFileSync(filename, JSON.stringify(measurementDb, null, 2));
+    // DO something with req.body
+    return res.status(200).json(measurementDb);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msg: 'Error' });
