@@ -25,4 +25,19 @@ An Express api that supports Hungry-plants app and sensor unit
 - GET /:id/measurements
 - GET /:id/measurements/latest
 
+
+## Development
+
+create a file called `./db/plants.json` and add the following
+
+```
+[
+  {
+    "id": "1",
+    "name": "Plant 1" 
+  }
+]
+```
+
+
 ```
