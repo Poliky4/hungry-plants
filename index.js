@@ -34,10 +34,12 @@ app.get('/:id', async (req, res) => {
 
   const measurements = await JSON.parse(fs.readFileSync(`./db/measurements/${id}.json`));
 
+  const filteredMeasurements = measurements.reverse().slice(0, 30);
+
   console.log(200);
   return res.status(200).json({
     ...plant,
-    measurements,
+    measurements: filteredMeasurements,
   });
 });
 
