@@ -12,6 +12,8 @@ const {
   // manyPlants,
 } = require('./functions');
 
+const PORT = 3000;
+
 const app = express();
 
 app.use(cors());
@@ -95,6 +97,6 @@ app.post('/postMessurement', async (req, res) => {
   }
 });
 
-app.listen(1337, () => {
-  console.log('app running on port 1337');
+app.listen(PORT, () => {
+  console.log('app running on port', PORT);
 });
