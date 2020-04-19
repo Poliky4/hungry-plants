@@ -2,7 +2,7 @@
 
 An Express api that supports Hungry-plants app and sensor unit
 
-## api structure
+## API structure
 
 ```
 
@@ -14,7 +14,11 @@ An Express api that supports Hungry-plants app and sensor unit
   breed [string]               units
   latest_measurement [Obj]     humidity
                                Timestamp
+```
 
+### Endpoints
+
+```
 # Get all plants
 - GET /
 
@@ -25,19 +29,8 @@ An Express api that supports Hungry-plants app and sensor unit
 - GET /:id/measurements
 - GET /:id/measurements/latest
 
+```
 
 ## Development
 
-create a file called `./db/plants.json` and add the following
-
-```
-[
-  {
-    "id": "1",
-    "name": "Plant 1" 
-  }
-]
-```
-
-
-```
+Run `npm run mock` to generate some mock data
