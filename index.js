@@ -2,6 +2,8 @@ const fs = require('fs');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors')
+
 // const moment = require('moment');
 
 const {
@@ -12,9 +14,9 @@ const {
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 
 app.get('/', async (req, res) => {
   const plants = await JSON.parse(fs.readFileSync('./db/plants.json').toString());
@@ -93,6 +95,6 @@ app.post('/postMessurement', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('app running on port 3000');
+app.listen(1337, () => {
+  console.log('app running on port 1337');
 });
