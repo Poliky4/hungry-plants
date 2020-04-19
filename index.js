@@ -10,6 +10,8 @@ const {
   // manyPlants,
 } = require('./functions');
 
+const PORT = 3000;
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -93,6 +95,6 @@ app.post('/postMessurement', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('app running on port 3000');
+app.listen(PORT, () => {
+  console.log('app running on port', PORT);
 });
